@@ -1,14 +1,11 @@
 package bdagenda;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
 import javafx.application.Application;
-import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
@@ -16,7 +13,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 
 public class JanelaFX extends Application  {
 
@@ -25,9 +21,6 @@ public class JanelaFX extends Application  {
 	private TextField telefone;
 	private BDAgenda agenda;
 	private static TextArea textArea;
-	//Window stage = null;
-	
-
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -55,19 +48,11 @@ public class JanelaFX extends Application  {
 		btnInserirNovo.setPrefWidth(250);
 		btnInserirNovo.setStyle("-fx-background-color:#ecf0f1");
 		leftPane.add(btnInserirNovo, 2, 9);
+		Button btnSair = new Button("Sair");
+		btnSair.setPrefWidth(250);
+		btnSair.setStyle("-fx-background-color:#ecf0f1");
+		leftPane.add(btnSair, 3, 9);
 		
-		//-----Número do caixa do banco---/
-//		String[] options = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
-//		consultaNumCaixa = new ComboBox<String>(FXCollections.observableArrayList(options));
-//		leftPane.add(consultaNumCaixa, 0, 8);
-//		consultaNumCaixa.setStyle("-fx-background-color:#ecf0f1");
-//		consultaNumCaixa.setPromptText("Número do caixa");
-//		btnConsultaNumCaixa.setOnAction(e -> {
-//			if(consultaNumCaixa.getSelectionModel().getSelectedItem() != null){
-//				//consultaNumCaixa();
-//			}
-//        });
-	
 		//--nome e tel do usu para cadastrar--//
 		nome = new TextField("Nome");
 		nome.setPrefWidth(200);
@@ -75,8 +60,8 @@ public class JanelaFX extends Application  {
 		telefone = new TextField("Telefone");
 		telefone.setPrefWidth(200);
 		telefone.setStyle("-fx-background-color:#ecf0f1");
-		leftPane.add(nome, 3, 7);
-		leftPane.add(telefone, 3, 8);
+		leftPane.add(nome, 2, 7);
+		leftPane.add(telefone, 2, 8);
 		
 		//-----Nome do usuário a ser buscado---/
 		consultaNome = new TextField("Nome");
@@ -112,9 +97,14 @@ public class JanelaFX extends Application  {
 				}
 			}
 		});
-		
-			
-		
+		btnSair.setOnAction(e -> {
+				try {
+					sair();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+		});
+				
 		VBox root = new VBox();
 		root.setPadding(new Insets(10));
 		root.setSpacing(5);
@@ -163,6 +153,11 @@ public class JanelaFX extends Application  {
 		agenda.returnAgenda().inserirNovaPessoa(nome, telefone);
 	
 			textArea.setText("Usuário inserido!");
+	}
+	
+	public void sair() throws SQLException{
+		agenda.returnAgenda().sair();
+		textArea.setText("Conexão fechada!");
 	}
 
 

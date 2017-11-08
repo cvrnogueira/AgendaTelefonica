@@ -31,7 +31,6 @@ public class agendaDAOderby implements agendaDAO  {
         //fecha tudo!
         registros.close();
         consultaSQL.close();
-        conexao.close(); 
         return pessoas;
     }
    
@@ -61,9 +60,11 @@ public class agendaDAOderby implements agendaDAO  {
 		        //fecha tudo!
 		        registros.close();
 		        consultaSQL.close();
-		        conexao.close();
 		        return telefones;
 			
+		}
+		public void sair() throws SQLException{
+			conexao.close();
 		}
    
 }
