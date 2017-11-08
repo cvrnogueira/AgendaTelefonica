@@ -133,7 +133,7 @@ public class JanelaFX extends Application  {
 			textArea.appendText(pessoa);
 			textArea.appendText("\n");
 		}
-
+ 
 	}
 	
 	public void getFonePeloNome(String nome) throws SQLException{
